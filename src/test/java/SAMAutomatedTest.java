@@ -1,5 +1,10 @@
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.Duration;
 
 public class SAMAutomatedTest {
     private WebDriver driver;
@@ -24,4 +29,35 @@ public class SAMAutomatedTest {
     private By buscarLocator = By.xpath("//*[@id=\"wpcf7-f4996-p101-o1\"]/form/p[4]/input");
 
 
+    @BeforeEach
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://www.samsistemas.com.ar/");
+    }
+
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
+
+
+    @Test
+    @DisplayName("Prueba automatizada Busqueda de Articulos")
+    public void testSAMPage() {
+        // 1
+        driver.findElement(lupaLocator).click();
+
+        WebElement barraBusqueda = driver.findElement(barraBusquedaLocator);
+        barraBusqueda.clear();
+        barraBusqueda.sendKeys(palabraBuscada);
+        barraBusqueda.submit();
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        Assertions.assertEquals("Resultados de búsqueda para “devops” – SAM Sistemas", driver.getTitle());
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
 }
