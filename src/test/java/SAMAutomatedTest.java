@@ -76,5 +76,13 @@ public class SAMAutomatedTest {
         System.out.println("Cantidad de Articulos: " + articulos.size());
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+
+        // Moverse a la página 2 del resultado de búsqueda y clickear sobre el cuarto artículo
+        driver.findElement(pagina2Locator).click();
+        driver.findElements(ingresoArticuloLocator).get(numeroArticulo-1).click();
+
+        Assertions.assertEquals("Automatización de pruebas – SAM Sistemas", driver.getTitle());
+        Assertions.assertTrue(driver.findElements(TextLocator).size() != 0);
     }
 }
