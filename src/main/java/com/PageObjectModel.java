@@ -17,7 +17,6 @@ public class PageObjectModel {
 
     public PageObjectModel(WebDriver driver) {
         this.driver = driver;
-        this.action = new Actions(driver);
     }
 
     /**
@@ -27,6 +26,8 @@ public class PageObjectModel {
     public WebDriver chromeDriverConnection() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        action = new Actions(driver);
         return driver;
     }
 

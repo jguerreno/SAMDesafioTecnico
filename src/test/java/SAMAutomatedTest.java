@@ -9,6 +9,7 @@ public class SAMAutomatedTest {
     private WebDriver driver;
     private FindPage page;
 
+    private final String URL = "https://www.samsistemas.com.ar/";
     private final String devops = "devops";
     private final String testManagement = "Test Management";
     private final int numeroPagina = 2;
@@ -21,12 +22,9 @@ public class SAMAutomatedTest {
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
         page = new FindPage(driver);
-        page.visit("https://www.samsistemas.com.ar/");
+        driver = page.chromeDriverConnection();
+        page.visit(URL);
     }
 
     @AfterEach

@@ -58,7 +58,7 @@ public class FindPage extends PageObjectModel {
     }
 
     /**
-     * Se dirige al un articulo especifico de una pagina
+     * Se dirige a un articulo especifico de una pagina
      * @param page numero de pagina donde se encuentra el articulo
      * @param articleNumber numero de articulo relativo a la pagina
      */
