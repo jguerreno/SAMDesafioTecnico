@@ -32,8 +32,8 @@ public class FindPage extends PageObjectModel {
     }
 
     /**
-     *
-     * @param palabra
+     * Realiza la busqueda de un string
+     * @param palabra string a buscar
      */
     public void buscarPalabra(String palabra) {
         click(lupaLocator);
@@ -41,8 +41,8 @@ public class FindPage extends PageObjectModel {
     }
 
     /**
-     *
-     * @return
+     * Cuenta la cantidad de elementos que tuvo una busqueda
+     * @return retorna la cantidad de elementos de una busqueda
      */
     public int cantidadElementoBusqueda() {
         List<WebElement> articulos = findElements(articuloLocator);
@@ -58,9 +58,9 @@ public class FindPage extends PageObjectModel {
     }
 
     /**
-     *
-     * @param page
-     * @param articleNumber
+     * Se dirige al un articulo especifico de una pagina
+     * @param page numero de pagina donde se encuentra el articulo
+     * @param articleNumber numero de articulo relativo a la pagina
      */
     public void articlePage(int page, int articleNumber) {
         By pageLocator = By.linkText(String.valueOf(page));
@@ -69,9 +69,9 @@ public class FindPage extends PageObjectModel {
     }
 
     /**
-     *
-     * @param word
-     * @return
+     * Checkea si existe una palabra
+     * @param word palabra a buscar
+     * @return devuelve true si la palabra existe, de otro modo false
      */
     public Boolean wordExists(String word) {
         //By TextLocator = By.xpath("//*[contains(string(),'Test Management')]");
@@ -80,7 +80,7 @@ public class FindPage extends PageObjectModel {
     }
 
     /**
-     *
+     *  Se mueve al elemento trabaje con nosotros del header
      */
     public void trabajeConNosotros() {
         moveToElement(contactoLocator);
