@@ -21,7 +21,7 @@ public class FindPage extends PageObjectModel {
     private By linkArticuloLocator = By.xpath("//article/div/div[2]/header/h2/a");
     // Localizador Contacto
     private By contactoLocator = By.xpath("//a[@href=\"https://www.samsistemas.com.ar/contacto/\"][@class=\"menu-link\"]");
-    private By trabajoLocator = By.linkText("Trabaje con nosotros");
+    private By trabajoLocator = By.xpath("//*[@id=\"menu-item-108\"]/a");
     private By buscarLocator = By.xpath("//*[@id=\"wpcf7-f4996-p101-o1\"]/form/p[4]/input");
     // Localizar Footer
     private By footerLocator = By.xpath("//img[@src=\"https://samsistemas.com.ar/wp-content/uploads/2021/01/sam-icono-site-1.svg\"]");
