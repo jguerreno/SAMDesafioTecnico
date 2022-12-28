@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 import java.util.List;
@@ -25,9 +24,11 @@ public class SAMAutomatedTest {
     // Localizador Busqueda
     private By TextLocator = By.xpath("//span[contains(string(),'Test Management')]");
     // Localizador Contacto
-    private By contactoLocator = By.linkText("Contacto");
+    private By contactoLocator = By.xpath("//a[@href=\"https://www.samsistemas.com.ar/contacto/\"][@class=\"menu-link\"]");
     private By trabajoLocator = By.linkText("Trabaje con nosotros");
     private By buscarLocator = By.xpath("//*[@id=\"wpcf7-f4996-p101-o1\"]/form/p[4]/input");
+    // Localizar Footer
+    private By footerLocator = By.xpath("//img[@src=\"https://samsistemas.com.ar/wp-content/uploads/2021/01/sam-icono-site-1.svg\"]");
 
 
     @BeforeEach
@@ -84,5 +85,19 @@ public class SAMAutomatedTest {
 
         Assertions.assertEquals("Automatización de pruebas – SAM Sistemas", driver.getTitle());
         Assertions.assertTrue(driver.findElements(TextLocator).size() != 0);
+
+
+        // Seleccionar -> Contacto -> “Trabaje con nosotros”
+        Actions action = new Actions(driver);
+        WebElement contacto = driver.findElement(contactoLocator);
+        action.moveToElement(contacto).perform();
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        WebElement trabajo = driver.findElement(trabajoLocator);
+        action.moveToElement(trabajo).click().perform();
+        Assertions.assertTrue(driver.findElement(buscarLocator).isEnabled());
+        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        Assertions.assertTrue(driver.findElement(footerLocator).isDisplayed());
     }
 }
