@@ -87,4 +87,12 @@ public class FindPage extends PageObjectModel {
         waitSeconds(10);
         moveToElementAndClick(trabajoLocator);
     }
+
+    /**
+     * Checkea si el boton de envio del form de trabaje con nosotros esta habilitado
+     * @return true si esta habilitado, false si no lo esta
+     */
+    public Boolean botonEnvioFormTrabajoDisponible() {
+        return findElement(buscarLocator).isEnabled();
+    }
 }

@@ -142,4 +142,8 @@ public class PageObjectModel {
     public Boolean isDisplayed(By locator) {
         return driver.findElement(locator).isDisplayed();
     }
+
+    public void quit() {
+        driver.quit();
+    }
 }
