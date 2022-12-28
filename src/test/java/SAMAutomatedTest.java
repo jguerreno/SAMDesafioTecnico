@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+import java.util.List;
 
 public class SAMAutomatedTest {
     private WebDriver driver;
@@ -46,7 +47,7 @@ public class SAMAutomatedTest {
     @Test
     @DisplayName("Prueba automatizada Busqueda de Articulos")
     public void testSAMPage() {
-        // 1
+        // Busqueda de Palabra
         driver.findElement(lupaLocator).click();
 
         WebElement barraBusqueda = driver.findElement(barraBusquedaLocator);
@@ -57,6 +58,22 @@ public class SAMAutomatedTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         Assertions.assertEquals("Resultados de búsqueda para “devops” – SAM Sistemas", driver.getTitle());
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+
+        // Cantidad de Elementos arrojados por la busqueda
+        List<WebElement> articulos = driver.findElements(articuloLocator);
+
+        int cantidadPaginas = driver.findElements(paginasBusquedaLocator).size();
+        for(int i=0 ; i<cantidadPaginas ; i++) {
+            WebElement paginaSiguiente = driver.findElements(paginasBusquedaLocator).get(i);
+            paginaSiguiente.click();
+            articulos.addAll(driver.findElements(articuloLocator));
+        }
+
+        Assertions.assertEquals(articulos.size(), 17);
+        System.out.println("Cantidad de Articulos: " + articulos.size());
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
